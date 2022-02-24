@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+</style>
+
+<body>
+    <canvas id="myCanvas" height="200" width="200"></canvas>
+</body>
+<script>
+    // let myCanvas = document.getElementById('myCanvas');
+    myCanvas.height = document.documentElement.clientHeight;
+    myCanvas.width = document.documentElement.clientWidth;
+
+    // ctx.fillRect(0, 0, 150, 75);
+    let painting = false;
+    let last = {};
+    let ctx = myCanvas.getContext("2d");
+    ctx.fillStyle = "black";
+    ctx.lineCap = "round";
+    ctx.lineWidth = 10;
+
+    let isTouchDevice = 'ontouchstart' in document.documentElement;
+    // 检测是移动端还是PC端 true 移动端
+    if (isTouchDevice) {
+        myCanvas.ontouchstart = (e) => {
+            painting = true;
+            last.x = e.touches[0].clientX;
+            last.y = e.touches[0].clientY;
+        }
+        myCanvas.ontouchmove = (e) => {
+            if (painting) {
+                ctx.beginPath();
+                ctx.moveTo(last.x, last.y);
+                ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY);
+                ctx.stroke();
+                last.x = e.touches[0].clientX;
+                last.y = e.touches[0].clientY;
+            }
+        }
+    } else {
+        myCanvas.onmousedown = (e) => {
+            painting = true;
+            last = { x: e.clientX, y: e.clientY };
+        }
+        myCanvas.onmouseup = () => {
+            painting = false;
+        }
+
+        myCanvas.onmousemove = (e) => {
+            if (painting) {
+                ctx.beginPath();
+                ctx.moveTo(last.x, last.y);
+                ctx.lineTo(e.clientX, e.clientY);
+                ctx.stroke();
+                last.x = e.clientX;
+                last.y = e.clientY;
+            }
+        }
+    }
+
+</script>
+
+</html>

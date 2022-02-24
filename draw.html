@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    #box {
+        width: 100vw;
+        height: 100vh;
+        border: 1px solid red;
+    }
+</style>
+
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    // 性能低，每移动就会生成一个div
+    box.onmousemove = e => {
+        let div = document.createElement('div');
+        div.style.height = '6px';
+        div.style.width = '6px';
+        div.style.backgroundColor = 'black';
+        div.style.position = 'absolute';
+        div.style.left = e.clientX - 3 + 'px';
+        div.style.top = e.clientY - 3 + 'px';
+        div.style.borderRadius = '50%'
+        box.appendChild(div);
+    }
+</script>
+
+</html>
