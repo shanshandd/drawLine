@@ -13,6 +13,11 @@
         margin: 0;
         box-sizing: border-box;
     }
+
+    /* 修复body比canvas高4px的问题 */
+    canvas {
+        display: block;
+    }
 </style>
 
 <body>
@@ -22,7 +27,7 @@
     // let myCanvas = document.getElementById('myCanvas');
     myCanvas.height = document.documentElement.clientHeight;
     myCanvas.width = document.documentElement.clientWidth;
-
+    console.log(myCanvas.width, myCanvas.height);
     // ctx.fillRect(0, 0, 150, 75);
     let painting = false;
     let last = {};
