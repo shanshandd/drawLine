@@ -14,9 +14,10 @@
         box-sizing: border-box;
     }
 
-    /* 修复body比canvas高4px的问题 */
+    /* 修复body比canvas高4px的问题，两种方案如下 */
     canvas {
-        display: block;
+        /* display: block; */
+        vertical-align: middle;
     }
 </style>
 
