@@ -16,8 +16,8 @@
 
     /* 修复body比canvas高4px的问题，两种方案如下 */
     canvas {
-        /* display: block; */
-        vertical-align: middle;
+        display: block;
+        /* vertical-align: top;  */
     }
 </style>
 
@@ -28,7 +28,7 @@
     // let myCanvas = document.getElementById('myCanvas');
     myCanvas.height = document.documentElement.clientHeight;
     myCanvas.width = document.documentElement.clientWidth;
-    console.log(myCanvas.width, myCanvas.height);
+    // console.log(myCanvas.width, myCanvas.height);
     // ctx.fillRect(0, 0, 150, 75);
     let painting = false;
     let last = {};
@@ -40,6 +40,7 @@
     let isTouchDevice = 'ontouchstart' in document.documentElement;
     // 检测是移动端还是PC端 true 移动端
     if (isTouchDevice) {
+        console.log('移动端');
         myCanvas.ontouchstart = (e) => {
             painting = true;
             last.x = e.touches[0].clientX;
